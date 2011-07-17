@@ -1,0 +1,21 @@
+/** @author paulbertemes
+ *  @title Main Class for WebCrawler App
+ */
+
+package lu.paulbertemes.wwwcrawler;
+
+/**
+ * @author paulbertemes
+ *
+ */
+public class Main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

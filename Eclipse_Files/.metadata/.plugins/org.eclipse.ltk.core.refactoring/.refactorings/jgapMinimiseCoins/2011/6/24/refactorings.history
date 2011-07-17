@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;lu.paulbertemes.jgapMinimiseCoins&apos; to &apos;lu.paulbertemes.jgapminimisecoins&apos;&#x0A;- Original project: &apos;jgapMinimiseCoins&apos;&#x0A;- Original element: &apos;jgapMinimiseCoins/src/lu.paulbertemes.jgapMinimiseCoins&apos;&#x0A;- Renamed element: &apos;jgapMinimiseCoins/src/lu.paulbertemes.jgapminimisecoins&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;lu.paulbertemes.jgapMinimiseCoins&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;lu.paulbertemes.jgapMinimiseCoins" name="lu.paulbertemes.jgapminimisecoins" qualified="false" references="true" stamp="1307437679654" textual="false" version="1.0"/>
+</session>

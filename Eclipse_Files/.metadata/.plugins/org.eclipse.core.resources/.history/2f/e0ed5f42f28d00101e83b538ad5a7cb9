@@ -1,0 +1,13 @@
+package lu.paulbertemes.matlabcontrolTest;
+
+public class matlabcontrolTest {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) 
+	{
+
+	}
+
+}

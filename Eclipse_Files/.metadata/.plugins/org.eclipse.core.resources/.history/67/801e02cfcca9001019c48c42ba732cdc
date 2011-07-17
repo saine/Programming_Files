@@ -1,0 +1,22 @@
+/**
+ * 
+ */
+package lu.paul.bertemes.nightcrawler;
+
+/**
+ * @author paulbertemes
+ *
+ */
+public class GetUrl {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//Variables
+		URL url = "http://localhost:8888";
+
+	}
+
+}

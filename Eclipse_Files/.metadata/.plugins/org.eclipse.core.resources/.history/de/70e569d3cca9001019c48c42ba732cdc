@@ -1,0 +1,25 @@
+/**
+ * 
+ */
+package lu.paul.bertemes.nightcrawler;
+
+import java.net.URL;
+
+/**
+ * @author paulbertemes
+ *
+ */
+public class GetUrl {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		//Variables
+		URL url = "http://localhost:8888";
+		Scanner urlScanner = url.openStream();
+
+	}
+
+}

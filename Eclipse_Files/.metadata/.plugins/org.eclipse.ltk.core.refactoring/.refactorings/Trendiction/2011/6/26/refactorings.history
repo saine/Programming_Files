@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Ex3.java&apos; to &apos;Trendiction/src/lu.paulbertemes.trendiction&apos;&#x0A;- Original project: &apos;Trendiction&apos;&#x0A;- Destination element: &apos;Trendiction/src/lu.paulbertemes.trendiction&apos;&#x0A;- Original element: &apos;lu.paulbertemes.trendiction.Ex3.java&apos;" description="Copy compilation unit" destination="/src&lt;lu.paulbertemes.trendiction" element1="/src&lt;lu.paulbertemes.trendiction{Ex3.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1308486959560" units="1" version="1.0"/>
+</session>

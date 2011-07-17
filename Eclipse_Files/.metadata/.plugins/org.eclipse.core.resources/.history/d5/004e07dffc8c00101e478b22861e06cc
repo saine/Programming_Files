@@ -1,0 +1,14 @@
+package lu.paul.bertemes.jgaptest;
+
+public class main {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) 
+	{
+		jgap-examples ex1 = new jgap-examples();
+		
+	}
+
+}

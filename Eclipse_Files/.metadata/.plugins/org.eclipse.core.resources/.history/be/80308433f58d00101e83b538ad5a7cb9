@@ -1,0 +1,25 @@
+package lu.paulbertemes.matlabcontrolTest;
+
+import com.mathworks.toolbox.javabuilder.MWException;
+
+import Matlab2JavaTest.CHelloWorld;
+
+public class matlabcontrolTest 
+{
+	public static void main(String[] args) throws MWException 
+	{
+		CHelloWorld h1 = null;
+		
+		try 
+		{
+			h1 = new CHelloWorld();
+		} 
+		catch (MWException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		h1.hello(null);
+	}
+
+}

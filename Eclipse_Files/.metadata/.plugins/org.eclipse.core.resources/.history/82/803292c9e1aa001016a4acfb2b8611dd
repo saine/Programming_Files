@@ -1,0 +1,17 @@
+/**
+ * 
+ */
+
+import java.sql.*;
+import com.mysql.jdbc.Driver;
+
+/**
+ * @author paulbertemes
+ *
+ */
+public class Main{
+	
+//	Class.forName("com.mysql.jdbc.Driver");
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost","root","root");
+	//System.out.println("mysql test");
+}

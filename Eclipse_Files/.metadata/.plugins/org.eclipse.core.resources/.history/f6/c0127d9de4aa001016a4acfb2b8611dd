@@ -1,0 +1,38 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+
+public class DBTest 
+{
+	public static void main(String[] args) throws ClassNotFoundException,SQLException {
+		String username 	= "your username";
+		String password 	= "your MySQL password";
+		String tablename 	= "a table in your database";
+		String fieldname 	= "a field in that table";
+		String query 		= "SELECT " + fieldname + " FROM " + tablename + ";";
+		
+		/* this chunk of code can appear more or less verbatim */
+		/* in your database apps (including JSPs) */
+		String url = "jdbc:mysql://dbserver.cs.uchicago.edu/" + username;
+		Class.forName("com.mysql.jdbc.Driver");
+		
+		Connection con = DriverManager.getConnection(url, username, password);
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery(query);
+		
+		System.out.println("The contents of field " + fieldname + ":");
+		
+		while (rs.next())
+		System.out.print(rs.getString(1) + ", ");
+		
+		// note that getString anomalously starts counting at 1, not 0
+		System.out.println();
+		rs.close();
+		stmt.close();
+		con.close();
+	}
+}

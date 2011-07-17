@@ -1,0 +1,26 @@
+CMyLibrary L1 	= new CMyLibrary("Library1");
+ArrayList<CBook> a1 = new ArrayList<CBook>();
+ArrayList<CBook> a2 = new ArrayList<CBook>();
+
+CBook B1 		= new CBook		("Book1");
+CBook B2 		= new CBook		("Book2");
+CBook B3 		= new CBook		("Book3");
+CBook B4 		= new CBook		("Book4");
+CPerson P1 		= new CPerson	("Person1");
+CPerson P2 		= new CPerson	("Person2");
+CPerson P3 		= new CPerson	("Person3");
+CPerson P4 		= new CPerson	("Person4");
+
+L1.addBook(B1);
+L1.addBook(B2);
+L1.addBook(B3);
+L1.addBook(B4);
+
+System.out.println(B1.toString());
+
+L1.checkOut(B1, P1);
+System.out.println(B1.toString());
+System.out.println(L1.toString());
+
+a1 = L1.getAvailableBooks();
+a2 = L1.getUnAvailableBooks();

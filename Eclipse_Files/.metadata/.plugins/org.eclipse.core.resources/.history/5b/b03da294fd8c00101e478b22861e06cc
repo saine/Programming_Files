@@ -1,0 +1,25 @@
+package lu.paul.bertemes.jgaptest;
+
+import org.jgap.*;
+
+public class main 
+{
+
+	\*
+	* Starts the example
+	* @param args ignored
+	* @throws Exception
+	/*
+	public static void main(String[] args) 
+	{
+
+		public static void main(String[] args) throws Exception {
+		 GPConfiguration config = new GPConfiguration();
+		 config.setGPFitnessEvaluator(new DeltaGPFitnessEvaluator());
+		 config.setMaxInitDepth(6);
+		 config.setPopulationSize(100);
+		 config.setFitnessFunction(new MathProblem.FormulaFitnessFunction())
+		
+	}
+
+}

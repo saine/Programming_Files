@@ -1,0 +1,158 @@
+package lu.paul.bertemes.jgaptest;
+
+import java.util.Random;
+import org.jgap.*;
+import examples.gp.MathProblem;
+
+public class CMain 
+{
+	/*
+	* Starts the example
+	* @param args ignored
+	*/
+
+		public class CMain extends CachedFitnessFunction 
+		{
+		023:            /** String containing the CVS revision. Read out via reflection!*/
+		024:            private final static String CVS_REVISION = "$Revision: 1.1 $";
+		025:
+		026:            private final int m_targetAmount;
+		027:
+		028:            public static final int MAX_BOUND = 4000;
+		029:
+		030:            public MinimizingFitnessFunctionCached(int a_targetAmount) {
+		031:                if (a_targetAmount < 1 || a_targetAmount >= MAX_BOUND) {
+		032:                    throw new IllegalArgumentException(
+		033:                            "Change amount must be between 1 and " + MAX_BOUND
+		034:                                    + " cents.");
+		035:                }
+		036:                m_targetAmount = a_targetAmount;
+		037:            }
+		038:
+		039:            public double evaluate(IChromosome a_subject) {
+		040:                boolean defaultComparation = a_subject.getConfiguration()
+		041:                        .getFitnessEvaluator().isFitter(2, 1);
+		042:
+		043:                int changeAmount = amountOfChange(a_subject);
+		044:                int totalCoins = getTotalNumberOfCoins(a_subject);
+		045:                int changeDifference = Math.abs(m_targetAmount - changeAmount);
+		046:                double fitness;
+		047:                if (defaultComparation) {
+		048:                    fitness = 0.0d;
+		049:                } else {
+		050:                    fitness = MAX_BOUND / 2;
+		051:                }
+		052:                // Step 1: Determine distance of amount represented by solution from
+		053:                // the target amount. If the change difference is greater than zero we
+		054:                // will divide one by the difference in change between the
+		055:                // solution amount and the target amount. That will give the desired
+		056:                // effect of returning higher values for amounts closer to the target
+		057:                // amount and lower values for amounts further away from the target
+		058:                // amount.
+		059:                // In the case where the change difference is zero it means that we have
+		060:                // the correct amount and we assign a higher fitness value.
+		061:                // ---------------------------------------------------------------------
+		062:                if (defaultComparation) {
+		063:                    fitness += changeDifferenceBonus(MAX_BOUND / 2,
+		064:                            changeDifference);
+		065:                } else {
+		066:                    fitness -= changeDifferenceBonus(MAX_BOUND / 2,
+		067:                            changeDifference);
+		068:                }
+		069:                // Step 2: We divide the fitness value by a penalty based on the number of
+		070:                // coins. The higher the number of coins the higher the penalty and the
+		071:                // smaller the fitness value.
+		072:                // And inversely the smaller number of coins in the solution the higher
+		073:                // the resulting fitness value.
+		074:                // -----------------------------------------------------------------------
+		075:                if (defaultComparation) {
+		076:                    fitness -= computeCoinNumberPenalty(MAX_BOUND / 2,
+		077:                            totalCoins);
+		078:                } else {
+		079:                    fitness += computeCoinNumberPenalty(MAX_BOUND / 2,
+		080:                            totalCoins);
+		081:                }
+		082:                // Make sure fitness value is always positive.
+		083:                // -------------------------------------------
+		084:                return Math.max(1.0d, fitness);
+		085:            }
+		086:
+		087:            protected double changeDifferenceBonus(double a_maxFitness,
+		088:                    int a_changeDifference) {
+		089:                if (a_changeDifference == 0) {
+		090:                    return a_maxFitness;
+		091:                } else {
+		092:                    // we arbitrarily work with half of the maximum fitness as basis for non-
+		093:                    // optimal solutions (concerning change difference)
+		094:                    if (a_changeDifference * a_changeDifference >= a_maxFitness / 2) {
+		095:                        return 0.0d;
+		096:                    } else {
+		097:                        return a_maxFitness / 2 - a_changeDifference
+		098:                                * a_changeDifference;
+		099:                    }
+		100:                }
+		101:            }
+		102:
+		103:            protected double computeCoinNumberPenalty(double a_maxFitness,
+		104:                    int a_coins) {
+		105:                if (a_coins == 1) {
+		106:                    // we know the solution cannot have less than one coin
+		107:                    return 0;
+		108:                } else {
+		109:                    // The more coins the more penalty, but not more than the maximum fitness
+		110:                    // value possible. Let's avoid linear behavior and use
+		111:                    // exponential penalty calculation instead
+		112:                    return (Math.min(a_maxFitness, a_coins * a_coins));
+		113:                }
+		114:            }
+		115:
+		116:            public static int amountOfChange(IChromosome a_potentialSolution) {
+		117:                int numQuarters = getNumberOfCoinsAtGene(a_potentialSolution, 0);
+		118:                int numDimes = getNumberOfCoinsAtGene(a_potentialSolution, 1);
+		119:                int numNickels = getNumberOfCoinsAtGene(a_potentialSolution, 2);
+		120:                int numPennies = getNumberOfCoinsAtGene(a_potentialSolution, 3);
+		121:                return (numQuarters * 25) + (numDimes * 10) + (numNickels * 5)
+		122:                        + numPennies;
+		123:            }
+		124:
+		125:            public static int getNumberOfCoinsAtGene(
+		126:                    IChromosome a_potentialSolution, int a_position) {
+		127:                Integer numCoins = (Integer) a_potentialSolution.getGene(
+		128:                        a_position).getAllele();
+		129:                return numCoins.intValue();
+		130:            }
+		131:
+		132:            /**
+		133:             * Returns the total number of coins represented by all of the genes in
+		134:             * the given potential solution.
+		135:             *
+		136:             * @param a_potentialsolution the potential solution to evaluate
+		137:             * @return total number of coins represented by the given Chromosome
+		138:             *
+		139:             * @author Neil Rotstan
+		140:             * @since 1.0
+		141:             */
+		142:            public static int getTotalNumberOfCoins(
+		143:                    IChromosome a_potentialsolution) {
+		144:                int totalCoins = 0;
+		145:                int numberOfGenes = a_potentialsolution.size();
+		146:                for (int i = 0; i < numberOfGenes; i++) {
+		147:                    totalCoins += getNumberOfCoinsAtGene(a_potentialsolution, i);
+		148:                }
+		149:                return totalCoins;
+		150:            }
+		151:        }
+	
+	//Constructor
+	public CMain(int nPopSize) throws Exception
+	{
+	
+	public static void main(String[] args) throws Exception
+	{
+		//Create GA Object
+		CMain GAmain = new CMain(100);
+//		
+//		//Run Algorithm
+//		GAmain.run(100);
+	}
+}

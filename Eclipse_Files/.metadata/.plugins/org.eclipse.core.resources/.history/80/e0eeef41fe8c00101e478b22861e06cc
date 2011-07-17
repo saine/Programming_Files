@@ -1,0 +1,37 @@
+package lu.paul.bertemes.jgaptest;
+
+import org.jgap.gp.impl.DeltaGPFitnessEvaluator;
+import org.jgap.gp.impl.GPConfiguration;
+import examples.gp.MathProblem;
+
+public class main 
+{
+	/*
+	* Starts the example
+	* @param args ignored
+	*/
+	
+	//Member Variables
+	GPConfiguration Config;
+	
+	//Constructor
+	public main(int nPopSize) throws Exception
+	{
+		//Allocate Space for Configuration
+		this.Config = new GPConfiguration();
+		
+		//Set GA Parameters
+		Config.setGPFitnessEvaluator(new DeltaGPFitnessEvaluator());
+		Config.setMaxInitDepth(6);
+		Config.setPopulationSize(100);
+		Config.setFitnessFunction(new MathProblem.FormulaFitnessFunction());
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		 
+		 
+		
+	}
+
+}

@@ -1,0 +1,14 @@
+package lu.paulbertemes.matlabcontrolTest;
+
+import Matlab2JavaTest.CHelloWorld;
+
+public class matlabcontrolTest 
+{
+	public static void main(String[] args) 
+	{
+		CHelloWorld h1 = new Matlab2JavaTest.CHelloWorld("");
+		
+		
+	}
+
+}

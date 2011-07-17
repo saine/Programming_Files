@@ -1,0 +1,33 @@
+/**
+ * 
+ */
+package lu.paul.bertemes.nightcrawler;
+
+import java.net.URL;
+import java.util.Scanner;
+
+/**
+ * @author paulbertemes
+ *
+ */
+public class GetUrl {
+
+	/**
+	 * @param args
+	 * @throws Exception 
+	 */
+	public static void main(String[] args) throws Exception {
+		
+		//Variables
+		URL url = new URL("http://localhost:8888");
+		Scanner urlScanner = new Scanner(url.openStream());
+		RandomFileAccess pFile = new RandomFileAccess("Crawled_index.html");
+		
+		//Read Content of the Website
+		while(urlScanner.hasNext())
+		{
+			System.out.println(urlScanner.nextLine());
+			System.out.println("/n");
+		}
+	}
+}

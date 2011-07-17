@@ -1,0 +1,13 @@
+//Package
+package lu.paulbertemes.sudokusolver;
+
+/**
+ * This Class represent a sudoku block on a board
+ * 
+ * @author 	paulbertemes
+ * @version 1.1
+ */
+public class SudokuBlock 
+{
+	SudokuBoard[][] m_SudokuBlock
+}

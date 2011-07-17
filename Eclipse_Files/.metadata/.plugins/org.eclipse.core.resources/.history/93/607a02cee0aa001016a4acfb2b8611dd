@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+
+import com.mysql.jdbc.*;
+
+/**
+ * @author paulbertemes
+ *
+ */
+public class Main {
+	
+	System.out.println("mysql test");
+}

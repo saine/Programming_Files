@@ -1,0 +1,21 @@
+//Package
+package lu.paulbertemes.sudokusolver;
+
+/**
+ * This Class represent a sudoku block on a board
+ * 
+ * @author 	paulbertemes
+ * @version 1.1
+ */
+public class SudokuBlock 
+{
+	private SudokuField[][] m_SudokuBlock;
+	private boolean			m_bCompleted;
+	
+	//Constructor
+	public SudokuBlock(int nSize)
+	{
+		m_SudokuBlock = new SudokuField[nSize][nSize];
+		m_bCompleted  = false;
+	}
+}

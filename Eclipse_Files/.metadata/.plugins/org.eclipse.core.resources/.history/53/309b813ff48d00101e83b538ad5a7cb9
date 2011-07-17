@@ -1,0 +1,10 @@
+package lu.paulbertemes.matlabcontrolTest;
+
+public class matlabcontrolTest 
+{
+	public static void main(String[] args) 
+	{
+		CHelloWorld h1 = CHelloWorld();
+	}
+
+}

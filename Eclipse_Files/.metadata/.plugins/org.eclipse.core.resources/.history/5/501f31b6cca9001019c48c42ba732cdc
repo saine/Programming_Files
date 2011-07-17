@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package lu.paul.bertemes.nightcrawler;
+
+/**
+ * @author paulbertemes
+ *
+ */
+public class GetUrl {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

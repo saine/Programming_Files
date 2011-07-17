@@ -1,0 +1,99 @@
+package lu.paul.bertemes.jgaptest;
+
+import java.util.Random;
+
+import org.jgap.InvalidConfigurationException;
+import org.jgap.gp.CommandGene;
+import org.jgap.gp.function.*;
+import org.jgap.gp.impl.DeltaGPFitnessEvaluator;
+import org.jgap.gp.impl.GPConfiguration;
+import org.jgap.gp.impl.GPGenotype;
+import org.jgap.gp.terminal.Terminal;
+import org.jgap.gp.terminal.Variable;
+
+import examples.gp.MathProblem;
+
+public class CMain 
+{
+	/*
+	* Starts the example
+	* @param args ignored
+	*/
+	
+	//Member Variables
+	private GPConfiguration Config;
+	private GPGenotype		Genotype;
+	private Variable		vx;
+	private float[] x = new float[100];
+	private float[] y = new float[100];
+	
+	//Constructor
+	public CMain(int nPopSize) throws Exception
+	{
+		//Allocate Space for Configuration
+		this.Config = new GPConfiguration();
+		
+		//Set GA Parameters
+		Config.setGPFitnessEvaluator(new DeltaGPFitnessEvaluator());
+		Config.setMaxInitDepth		(6);
+		Config.setPopulationSize	(100);
+		Config.setFitnessFunction	(new MathProblem.FormulaFitnessFunction());
+		
+		//Generate First Genotype
+		Genotype = this.Create();
+	}
+	
+	//Create Genotype
+	public GPGenotype Create() throws InvalidConfigurationException 
+	{
+		Class[] 	types 		= {CommandGene.FloatClass};
+		Class[][] 	argTypes 	= {};
+		
+		// Define the commands and terminals the GP is allowed to use.
+		CommandGene[][] NodeSet = {
+									{ 	vx = Variable.create(Config, "X", CommandGene.FloatClass), 
+										new Add     (Config, CommandGene.FloatClass), new Subtract(Config, CommandGene.FloatClass),
+										new Multiply(Config, CommandGene.FloatClass), new Divide  (Config, CommandGene.FloatClass),
+										new Sine    (Config, CommandGene.FloatClass), new Cosine  (Config, CommandGene.FloatClass),
+										new Exp     (Config, CommandGene.FloatClass), new Terminal(Config, CommandGene.FloatClass, 2.0d, 10.0d, false)
+									 }
+								   };
+
+	
+	// Randomly initialize function data (X-Y table) for x^4+x^3+x^2+x. This is problem-specific and not necessary in other cases. 
+	Random random = new Random(); 
+	
+	for (int i=0;i<20;i++) 
+	{
+		float f = 2.0f * (random.nextFloat() - 0.5f); 
+		x[i] = f; 
+		y[i] = f * f * f * f + f * f * f + f * f - f; 
+		
+		System.out.println(i + ") " + x[i] + "      " + y[i]);	
+	} 
+
+	// Create genotype with initial population. Allow max. 100 nodes within one program.
+	GPGenotype Geno = new GPGenotype();
+	Geno = Genotype.randomInitialGenotype(Config, types, argTypes, NodeSet, 100, true);
+	return(Geno); 
+	}
+
+	//Perform Algorithm
+	public void run(int nRuns)
+	{
+		//Do nRuns Evolutions in a row
+		Genotype.evolve(nRuns); 
+		
+		//Output best solution found.
+		Genotype.outputSolution(Genotype.getAllTimeBest());
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		//Create GA Object
+		CMain GAmain = new CMain(100);
+//		
+//		//Run Algorithm
+//		GAmain.run(100);
+	}
+}

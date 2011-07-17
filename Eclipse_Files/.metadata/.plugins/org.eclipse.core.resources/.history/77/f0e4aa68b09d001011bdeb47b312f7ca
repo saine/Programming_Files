@@ -1,0 +1,46 @@
+/**
+ * 
+ */
+package lu.paulbertemes.sudokusolver;
+
+/**
+ * This class handles all the functionalities involved with a single
+ * field on a sudoku board 
+ * 
+ * @author 	paulbertemes
+ * @version 1.1
+ */
+public class SudokuField 
+{
+	int 	m_nValue;
+	boolean m_bOccupied;
+	
+	//First Constructor
+	public SudokuField()
+	{
+		m_nValue 	= 0;
+		m_bOccupied = false;
+	}
+	
+	//Second Constructor
+	public SudokuField(int nValue)
+	{
+		m_bValue 	= nValue;
+		m_bOccupied = true;
+	}
+	
+	public boolean getOccupied()
+	{
+		return(m_bOccupied);
+	}
+	
+	public int getValue()
+	{
+		return(m_nValue);
+	}
+	
+	public void setValue(int nValue)
+	{
+		m_nValue = nValue;
+	}
+}

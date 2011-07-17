@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;lu.paulbertemes.sudokusolver.SudokuBoard&apos; to &apos;Sudoku&apos;&#x0A;- Original project: &apos;SudokuSolver&apos;&#x0A;- Original element: &apos;lu.paulbertemes.sudokusolver.SudokuBoard&apos;&#x0A;- Renamed element: &apos;lu.paulbertemes.sudokusolver.Sudoku&apos;&#x0A;- Update references to refactored element&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;SudokuBoard&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;lu.paulbertemes.sudokusolver{SudokuBoard.java[SudokuBoard" matchStrategy="1" name="Sudoku" qualified="false" references="true" similarDeclarations="false" stamp="1309340808185" textual="false" version="1.0"/>
+</session>

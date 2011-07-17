@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package lu.paulbertemes.sudokusolver;
+
+/**
+ * @author paulbertemes
+ *
+ */
+public class SudokuField {
+
+}
