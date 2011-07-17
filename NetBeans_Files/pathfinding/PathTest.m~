@@ -1,0 +1,22 @@
+%Test Function for Path Planning Algorithms
+
+data = importdata('_Summary.txt');
+data = data.data
+%Setup
+% clc
+% close all;
+% clear all;
+% clear classes;
+
+%Volume to be Considered
+Dimensions = [50,];
+
+%Obstacles [x,y,Height]
+Obs = [];
+
+%Start & Goal Positions
+Start = a.Start;
+Goal  = a.End
+
+% AStar = AStar(Dimensions,1,Start,Goal,Obs);
+A  = AStar(Start,Goal,Dimensions,Obs,0)

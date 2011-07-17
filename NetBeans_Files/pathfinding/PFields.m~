@@ -1,0 +1,53 @@
+
+
+function [A] = PFields(K1,XY1,K2,XY2,K3,XY3,Kg,XYGoal) 
+    
+    y1=XY1(1); 
+    x1=XY1(2); 
+    y2=XY2(1);
+    x2=XY2(2); 
+    y3=XY3(1); 
+    x3=XY3(2);
+    GoalY=XYGoal(1);
+    GoalX=XYGoal(2);
+    i=1:100; 
+    j=1:100;
+    for I = 1:100,
+        for J =1:100
+            R1 = (J/10-y1)^2+(I/10-x1)^2; 
+            R2 = (J/10-y2)^2+(I/10-x2)^2; 
+            R3 = (J/10-y3)^2+(I/10-x3)^2; % DIST3^2 is the squared distance from obstacle 3 to current point 
+            RG= sqrt((J/10-GoalY)^2+(I/10-GoalX)^2); % DISTG is the distance from current position to Goal
+            %Power = SUM of Ki/DISTi^2 + Kg DISTG 
+            A(I,J) = K1/(R1+.001)+ K2/(R2+.001)+K3/(R3+.001)+ Kg*RG; 
+            if (A(I,J)>300)
+                A(I,J)=300; 
+            end
+        end
+    end
+    % Searching the path 
+    a=1; 
+    b=1; 
+    B=zeros(length(A)); 
+    value=(abs(a-GoalX*10)+abs(b-GoalY*10)); 
+    
+    while value>0,
+        [a1,b1] = checking(A,a,b,100,100); 
+        
+        if((a1==a)&(b1==b))
+            a=a1; 
+            b=b1; 
+            B(a,b)=15; 
+            break;
+        else
+            a=a1;
+            b=b1;
+            B(a,b)=15; 
+        end
+        
+        value=(abs(a-GoalX*10)+abs(b-GoalY*10)); 
+    end
+
+    %A(i,j)=A(i,j)+B(i,j)
+    
+end

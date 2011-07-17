@@ -1,0 +1,187 @@
+%--------------------------------------------------------------------------
+%AStar Function
+%--------------------------------------------------------------------------
+
+function Path = Astar(Start,Goal,Dimensions,Obstacles,Mode,Diam)
+    
+    %Get Map Dimensions
+    Length = Dimensions(1,1);
+    Width  = Dimensions(1,2);
+    Height = Dimensions(1,3);
+   
+    %Initialise Variables
+    OLCount      = 1;
+    NoPath       = 0;
+    PathCost     = 0;
+    OpenList     = [];
+    ClosedList   = [];
+    Path         = [];
+    
+    %Use Predefined or Interactive Data
+    if Mode == 0
+        Node         = Start;
+        GoalDist     = Distance(Start,Goal,0);
+        %Generate Matrix Representation of Map
+        Map = 2*ones(Width,Length,Height);
+
+        %Put Obstacles on Map
+        for i = 1:size(Obstacles)
+        	Map(Obstacles(i,1),Obstacles(i,2),Obstacles(i,3)) = -1;
+        end
+
+        %Set Start and Goal Points on Map
+        Map(Start(1,1),Start(1,2),Start(1,3)) = 1;
+        Map(Goal(1,1),  Goal(1,2), Goal(1,3)) = 0;
+    else
+        [Start,Goal,Map] = INInteract(Length,Width,Height);
+        Node             = Start;
+        GoalDist         = Distance(Start,Goal,0);
+    end
+
+    %Create Closed List
+    Counter = 1;
+    for i = 1:Width
+        for j = 1:Length
+            for k = 1:Height
+                if Map(i,j,k) == -1
+                    ClosedList(Counter,1) = i;
+                    ClosedList(Counter,2) = j;
+                    ClosedList(Counter,3) = k;
+                    Counter = Counter+1;
+                end
+            end
+        end
+    end
+    
+    %Insert Root Node into OpenList
+    OpenList(OLCount,:) = OpenListAdd(Node,Node,PathCost,GoalDist,GoalDist);
+    OpenList(OLCount,1) = 0;
+
+    %Insert Root Node into ClosedList
+    CLCount               = size(ClosedList,1)+1;
+    ClosedList(CLCount,1) = Node(1,1);
+    ClosedList(CLCount,2) = Node(1,2);
+    ClosedList(CLCount,3) = Node(1,3);
+    
+    %Perform AStart Search
+    while (Node(1,1)~= Goal(1,1)||Node(1,2)~=Goal(1,2)||Node(1,3)~=Goal(1,3))&&NoPath==0 
+        %Find Neighbouring Cells and their Cost
+        NC      = FindNC(Node,Goal,PathCost,ClosedList,Length,Width,Height);
+        NCCount = size(NC,1);
+        
+        %Parse Through Neighbour List
+        for i = 1:NCCount
+            Flag = 0;
+            %Parse Through OpenList
+            for j = 1:OLCount
+                nNC = [NC(i,1),NC(i,2),NC(i,3)];
+                nOL = [OpenList(j,2),OpenList(j,3),OpenList(j,4)];
+                if nNC == nOL
+                    OpenList(j,10) = min(OpenList(j,10),NC(i,6));
+                    
+                    %Update the Values for [Parent,gn,hn]
+                    if OpenList(j,10) == NC(i,6)
+                        OpenList(j,5) = Node(1,1);
+                        OpenList(j,6) = Node(1,2);
+                        OpenList(j,7) = Node(1,3);
+                        OpenList(j,8) = NC(i,4);
+                        OpenList(j,9) = NC(i,5);
+                    end
+                    Flag = 1;
+                end
+            end
+            if Flag == 0
+                %Add Nodes to OpenList
+                OLCount = OLCount+1;
+                OpenList(OLCount,:) = OpenListAdd(nNC,Node,NC(i,4),NC(i,5),NC(i,6));
+            end
+        end
+        
+        %Find Lowest Cost Node
+        minInNode = min_fn(OpenList,OLCount,Goal);
+        
+        if (minInNode ~= -1)    
+            %Set Node to Minimum Cost Cell
+            Node(1,1) = OpenList(minInNode,2);
+            Node(1,2) = OpenList(minInNode,3);
+            Node(1,3) = OpenList(minInNode,4);
+            
+            %Update the Cost of Travelling to Parent
+            PathCost = OpenList(minInNode,10);
+            
+            %Move the Node to ClosedList
+            CLCount               = CLCount+1;
+            ClosedList(CLCount,1) = Node(1,1);
+            ClosedList(CLCount,2) = Node(1,2);
+            ClosedList(CLCount,3) = Node(1,3);
+            OpenList(minInNode,1) = 0;
+        else
+              %No Feasible Path
+              NoPath = 1;
+        end
+    end
+    
+    %Backtrack through List to Find Path
+    CLCount  = size(ClosedList,1);
+    xNode    = ClosedList(CLCount,1);
+    yNode    = ClosedList(CLCount,2);
+    zNode    = ClosedList(CLCount,3);
+
+    %Set Starting Point
+    Path(1,1) = xNode;
+    Path(1,2) = yNode;
+    Path(1,3) = zNode;
+    Node      = [xNode,yNode,zNode];
+    i         = 2;
+
+    if Node == Goal
+        
+        %Traverse OPEN and determine the parent nodes
+        Nodei   = node_index(OpenList,Node);
+        Parentx = OpenList(Nodei,5);
+        Parenty = OpenList(Nodei,6);
+        Parentz = OpenList(Nodei,7);
+        Parent  = [Parentx,Parenty,Parentz];
+   
+        while( Parentx ~= Start(1,1)||Parenty~= Start(1,2)||Parentz ~= Start(1,3))
+            Path(i,1) = Parentx;
+            Path(i,2) = Parenty;
+            Path(i,3) = Parentz;
+           
+            %Get Parents of Parents
+            Nodei = node_index(OpenList,Parent);
+            Parentx = OpenList(Nodei,5);
+            Parenty = OpenList(Nodei,6);
+            Parentz = OpenList(Nodei,7);
+            Parent  = [Parentx,Parenty,Parentz];
+            i       = i+1;
+        end
+    end
+    
+    Path = [Goal;Path;Start];
+    Path = ;
+    %Plot the Optimal Path!
+    figure;
+    grid on;
+    plotcube([1 1 1],Start-1,.8,[0 1 0]);
+    hold on;
+    axis([])
+    plotcube([1 Diam Diam],Goal-1,.8,[1 0 0]);
+hold on;
+    plot3((Path(:,1)-1)*Diam,(Path(:,2)-1)*Diam,(Path(:,3)-0.5)*Diam,'g','linewidth',2); 
+    
+    axis([0 Length*Diam 0 Width*Diam 0 Height*Diam]);
+    for i = 1:Width
+       for j = 1:Length
+           for k = 1:Height 
+               if Map(i,j,k) == -1
+                   plotcube([Diam Diam Diam],[(i-1)*Diam (j-1)*Diam (k-1)*Diam],.8,[0 0 0]);
+               end
+           end
+       end
+    end
+
+end
+
+%--------------------------------------------------------------------------
+%--------------------------------------------------------------------------
