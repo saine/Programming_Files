@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<list key="workingset_selection_history">
+		<item value="WIP"/>
+	</list>
 	<section name="WorkbenchPreferenceDialogSettings">
-		<item value="0" key="DIALOG_Y_ORIGIN"/>
-		<item value="0" key="DIALOG_X_ORIGIN"/>
+		<item value="37" key="DIALOG_Y_ORIGIN"/>
+		<item value="492" key="DIALOG_X_ORIGIN"/>
 	</section>
 	<section name="NewWizardAction">
-		<item value="org.eclipse.jdt.ui.wizards.NewClassCreationWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<item value="org.eclipse.ui.wizards.new.file" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
-			<item value="org.eclipse.jdt.ui.java"/>
+			<item value="org.eclipse.ui.Basic"/>
+			<item value="tk.eclipse.plugin.htmleditor"/>
+			<item value="com.android.ide.eclipse.wizards.category"/>
+			<item value="org.eclipse.wst.XMLCategory"/>
+			<item value="org.eclipse.ui.Examples"/>
 		</list>
+	</section>
+	<section name="InstallationDialogSettings">
+		<item value="702" key="DIALOG_WIDTH"/>
+		<item value="-154" key="DIALOG_Y_ORIGIN"/>
+		<item value="-68" key="DIALOG_X_ORIGIN"/>
+		<item value="654" key="DIALOG_HEIGHT"/>
+		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="EditorSelectionDialog">
 		<item value="true" key="EditorSelectionDialog.STORE_ID_INTERNAL_EXTERNAL"/>

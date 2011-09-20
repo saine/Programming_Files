@@ -3,8 +3,8 @@
 	<section name="org.eclipse.jdt.debug.ui.PACKAGE_SELECTION_DIALOG_SECTION">
 		<item value="382" key="DIALOG_WIDTH"/>
 		<item value="-17" key="DIALOG_Y_ORIGIN"/>
-		<item value="71" key="DIALOG_X_ORIGIN"/>
 		<item value="377" key="DIALOG_HEIGHT"/>
+		<item value="71" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.jdt.debug.ui.MAIN_METHOD_SELECTION_DIALOG">
@@ -13,9 +13,15 @@
 		<section name="DialogBoundsSettings">
 			<item value="600" key="DIALOG_WIDTH"/>
 			<item value="167" key="DIALOG_Y_ORIGIN"/>
-			<item value="385" key="DIALOG_X_ORIGIN"/>
 			<item value="500" key="DIALOG_HEIGHT"/>
+			<item value="385" key="DIALOG_X_ORIGIN"/>
 			<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 		</section>
+	</section>
+	<section name="org.eclipse.jdt.internal.debug.ui.ExpressionInformationControlCreator$ExpressionInformationControl">
+		<item value="200" key="SashWeightDetails"/>
+		<item value="200" key="SashWeightTree"/>
+		<item value="156" key="HEIGHT"/>
+		<item value="600" key="WIDTH"/>
 	</section>
 </section>

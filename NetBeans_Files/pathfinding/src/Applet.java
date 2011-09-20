@@ -9,17 +9,15 @@
 ////------------------------------------------------------------------------------
 ////APPLET CLASS DEFINITION
 ////------------------------------------------------------------------------------
-//
-//public class Applet 
-//{  
-//    public static void main(String[] args) 
-//    {
-//        Applet3D a = new Applet3D();
-//        Thread b = a.startTh();
-//        a.stopTh(b);
-//        
-////        System.exit(0);
-//        
+
+public class Applet 
+{  
+    public static void main(String[] args) 
+    {
+        Applet3D a = new Applet3D();
+        
+//        System.exit(0);
+        
 //    }
 //}
 ////------------------------------------------------------------------------------

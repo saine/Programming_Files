@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workingSetManager>
+<workingSet editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1312916801146_1" label="WIP" name="WIP">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/macMonitorV1" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/Chat" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/androidHello" type="4"/>
+<item elementID="=objHistory" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=macHistory" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
 <workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1306845321039_0" label="Window Working Set" name="Aggregate for window 1306845321037"/>
+<mruList name="WIP"/>
 </workingSetManager>
